@@ -1,0 +1,36 @@
+name: Build SampleRateDestroyer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: |
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES=arm64
+
+      - name: Build
+        run: |
+          cmake --build build --config Release --parallel 4
+
+      - name: Package plugins
+        run: |
+          mkdir -p artifacts
+          find build -type d \( -name "*.vst3" -o -name "*.component" \) -exec cp -R {} artifacts/ \;
+
+      - name: Upload plugins
+        uses: actions/upload-artifact@v4
+        with:
+          name: SampleRateDestroyer-Mac
+          path: artifacts/
