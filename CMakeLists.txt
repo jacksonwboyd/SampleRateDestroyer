@@ -50,7 +50,11 @@ target_link_libraries(SampleRateDestroyer PRIVATE
 )
 
 if(APPLE)
+    # Build a Universal 2 binary so the same plugin works on both
+    # Apple Silicon (arm64) and Intel (x86_64) Macs.
+    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "" FORCE)
     set_target_properties(SampleRateDestroyer PROPERTIES
         XCODE_ATTRIBUTE_MACOSX_DEPLOYMENT_TARGET "11.0"
+        MACOSX_BUNDLE TRUE
     )
 endif()
