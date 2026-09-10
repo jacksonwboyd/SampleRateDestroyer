@@ -17,8 +17,8 @@ juce_add_plugin(SampleRateDestroyer
     COMPANY_NAME "Independent"
     PRODUCT_NAME "Sample Rate Destroyer"
     BUNDLE_ID "com.independent.sampleratedestroyer"
-    PLUGIN_MANUFACTURER_CODE SRDR
-    PLUGIN_CODE SRD1
+    PLUGIN_MANUFACTURER_CODE Indp
+    PLUGIN_CODE SRD2
     FORMATS AU VST3
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
